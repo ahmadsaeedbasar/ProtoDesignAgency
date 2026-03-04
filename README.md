@@ -1,7 +1,7 @@
 
 # ProtoDesignAgency Portfolio
 
-Production-ready Vite + React portfolio site for a UI/UX designer and prototyper agency.
+Production-ready Vite + React portfolio site for a UI/UX designer and prototyper agency of Ahmad Saeed Basar
 
 ## Development
 
