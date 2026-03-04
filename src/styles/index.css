@@ -1,0 +1,228 @@
+@import './fonts.css';
+@import './tailwind.css';
+@import './theme.css';
+
+* {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+body {
+  background-color: var(--background);
+  background-image: none;
+  min-height: 100vh;
+}
+
+@layer components {
+  .squircle {
+    border-radius: var(--radius);
+    corner-shape: squircle;
+  }
+
+  .page-shell {
+    @apply min-h-screen;
+  }
+
+  .section-wrap {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  }
+
+  .section-pad {
+    @apply py-20 md:py-24;
+  }
+
+  .section-pad-tight {
+    @apply py-16 md:py-20;
+  }
+
+  .hero-wrap {
+    @apply relative pt-20 pb-20 md:pt-28 md:pb-24;
+  }
+
+  .hero-content {
+    @apply text-center max-w-3xl mx-auto;
+  }
+
+  .section-head {
+    @apply text-center mb-12 md:mb-14;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-5xl font-bold tracking-tight text-[var(--text-primary)];
+  }
+
+  .section-lead {
+    @apply text-lg text-[var(--text-secondary)] mt-4 max-w-2xl mx-auto;
+  }
+
+  .card-pad {
+    @apply p-6 md:p-7;
+  }
+
+  .cards-grid {
+    @apply gap-6 md:gap-7 p-2 md:p-3;
+  }
+
+  .cards-grid-tight {
+    @apply gap-4 md:gap-5 p-2;
+  }
+
+  .card-equal {
+    @apply h-full flex flex-col;
+  }
+
+  .surface-panel {
+    @apply border border-border/80 bg-card/90 backdrop-blur-md;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: color-mix(in oklab, var(--background) 74%, transparent);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-elevated {
+    @apply border border-border/90;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: color-mix(in oklab, var(--background) 78%, transparent);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .text-display {
+    @apply font-semibold tracking-tight text-[var(--text-primary)];
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius)] border border-border/80 bg-card/90 text-xs text-[var(--text-secondary)];
+    corner-shape: squircle;
+  }
+
+  .pill-nav {
+    @apply rounded-[var(--radius)] border border-border/80 bg-card/90 shadow-sm;
+    corner-shape: squircle;
+  }
+
+  .cta-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-all;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .cta-primary:hover {
+    background: var(--primary-hover);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .cta-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 transition-colors;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid color-mix(in oklab, var(--primary) 36%, var(--border));
+  }
+
+  .cta-secondary:hover {
+    background: color-mix(in oklab, var(--primary) 24%, transparent);
+  }
+
+  .cta-contrast {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3 font-semibold transition-colors;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: var(--contrast-button-bg);
+    color: var(--contrast-button-fg);
+  }
+
+  .cta-contrast:hover {
+    background: var(--contrast-button-hover);
+  }
+
+  .cta-contrast-outline {
+    @apply inline-flex items-center justify-center px-7 py-3 transition-colors;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    border: 1px solid var(--contrast-outline-border);
+    background: transparent;
+    color: var(--footer-text);
+  }
+
+  .cta-contrast-outline:hover {
+    background: var(--contrast-outline-hover);
+  }
+
+  .status-success {
+    border-color: var(--status-new-border);
+    background: var(--status-new-bg);
+    color: var(--status-new-text);
+  }
+
+  .status-info {
+    border-color: var(--status-live-border);
+    background: var(--status-live-bg);
+    color: var(--status-live-text);
+  }
+
+  .tone-1 { background: var(--gradient-tone-1); }
+  .tone-2 { background: var(--gradient-tone-2); }
+  .tone-3 { background: var(--gradient-tone-3); }
+  .tone-4 { background: var(--gradient-tone-4); }
+  .tone-5 { background: var(--gradient-tone-5); }
+  .tone-6 { background: var(--gradient-tone-6); }
+
+  .hero-panel {
+    @apply relative overflow-hidden p-12 md:p-16 border border-border/70;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: color-mix(in oklab, var(--background) 72%, transparent);
+  }
+
+  .hero-panel-title {
+    @apply font-bold tracking-tight text-[var(--text-primary)];
+  }
+
+  .hero-panel-copy {
+    @apply text-[var(--text-secondary)];
+  }
+
+  .hero-section {
+    @apply border border-border/70 backdrop-blur-md;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    background: color-mix(in oklab, var(--background) 82%, transparent);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .hero-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .hero-glow::before {
+    content: "";
+    position: absolute;
+    top: -22rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70rem;
+    height: 70rem;
+    background: none;
+    filter: blur(80px);
+  }
+}
