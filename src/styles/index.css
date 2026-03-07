@@ -1,15 +1,25 @@
+/* Global style entrypoint:
+ * 1) load font faces
+ * 2) load Tailwind layers/utilities
+ * 3) load theme tokens (CSS variables)
+ */
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
 
+/* Set the base UI font across the app.
+ * Heading styles override this with the display family below.
+ */
 * {
   font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+/* Smooth in-page anchor transitions for navigation links. */
 html {
   scroll-behavior: smooth;
 }
 
+/* Keep headings visually distinct and tighter for a strong hero/section hierarchy. */
 h1,
 h2,
 h3,
@@ -20,6 +30,7 @@ h6 {
   letter-spacing: -0.02em;
 }
 
+/* Body surface comes from theme tokens to support palette switches centrally. */
 body {
   background-color: var(--background);
   background-image: none;
@@ -27,11 +38,13 @@ body {
 }
 
 @layer components {
+  /* Squircle helper for components that opt into organic corners. */
   .squircle {
     border-radius: var(--radius);
     corner-shape: squircle;
   }
 
+  /* Shared layout primitives used by page-level sections. */
   .page-shell {
     @apply min-h-screen;
   }
@@ -50,6 +63,38 @@ body {
 
   .hero-wrap {
     @apply relative pt-20 pb-20 md:pt-28 md:pb-24;
+  }
+
+  .hero-layout {
+    @apply grid gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] xl:grid-cols-[minmax(0,1fr)_24rem] items-center;
+  }
+
+  .section-with-media {
+    @apply grid gap-8 lg:gap-10 items-start lg:grid-cols-[18rem_minmax(0,1fr)];
+  }
+
+  .section-with-media.media-right {
+    @apply lg:grid-cols-[minmax(0,1fr)_18rem];
+  }
+
+  .section-with-media.media-right .section-body {
+    @apply lg:order-1;
+  }
+
+  .section-with-media.media-right .section-media {
+    @apply lg:order-2;
+  }
+
+  .section-with-media.media-left .section-body {
+    @apply lg:order-2;
+  }
+
+  .section-with-media.media-left .section-media {
+    @apply lg:order-1;
+  }
+
+  .section-body {
+    min-width: 0;
   }
 
   .hero-content {
@@ -80,10 +125,50 @@ body {
     @apply gap-4 md:gap-5 p-2;
   }
 
+  .media-sticky {
+    @apply lg:sticky lg:top-24;
+  }
+
+  .media-frame {
+    @apply relative overflow-hidden border border-border/80 bg-card/90 p-3;
+    border-radius: var(--radius);
+    corner-shape: squircle;
+    box-shadow: var(--shadow-soft);
+    animation: media-float 6s ease-in-out infinite;
+  }
+
+  .media-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: calc(var(--radius) - 0.3rem);
+    transform-origin: center;
+    animation: media-zoom 8s ease-in-out infinite;
+  }
+
+  .media-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 20% 15%, color-mix(in oklab, var(--primary) 28%, transparent), transparent 38%),
+      radial-gradient(circle at 80% 80%, color-mix(in oklab, var(--info) 24%, transparent), transparent 40%);
+    mix-blend-mode: screen;
+    opacity: 0.7;
+    animation: media-glow 5.2s ease-in-out infinite alternate;
+  }
+
+  .media-tag {
+    @apply absolute left-4 bottom-4 text-[10px] uppercase tracking-[0.12em] px-2.5 py-1 border border-border/70 bg-card/90 text-[var(--text-primary)];
+    border-radius: var(--radius);
+    corner-shape: squircle;
+  }
+
   .card-equal {
     @apply h-full flex flex-col;
   }
 
+  /* Card/surface primitives backed by theme tokens for consistent elevation. */
   .surface-panel {
     @apply border border-border/80 bg-card/90 backdrop-blur-md;
     border-radius: var(--radius);
@@ -104,6 +189,7 @@ body {
     @apply font-semibold tracking-tight text-[var(--text-primary)];
   }
 
+  /* Small reusable UI patterns for labels, pills, and navigation chips. */
   .chip {
     @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-[var(--radius)] border border-border/80 bg-card/90 text-xs text-[var(--text-secondary)];
     corner-shape: squircle;
@@ -165,6 +251,7 @@ body {
     background: var(--contrast-outline-hover);
   }
 
+  /* Semantic status styles to avoid hardcoded per-component colors. */
   .status-success {
     border-color: var(--status-new-border);
     background: var(--status-new-bg);
@@ -177,6 +264,7 @@ body {
     color: var(--status-live-text);
   }
 
+  /* Gradient tone utilities for quick visual variety in cards and accents. */
   .tone-1 { background: var(--gradient-tone-1); }
   .tone-2 { background: var(--gradient-tone-2); }
   .tone-3 { background: var(--gradient-tone-3); }
@@ -199,6 +287,7 @@ body {
     @apply text-[var(--text-secondary)];
   }
 
+  /* Hero container and background glow treatment. */
   .hero-section {
     @apply border border-border/70 backdrop-blur-md;
     border-radius: var(--radius);
@@ -225,4 +314,21 @@ body {
     background: none;
     filter: blur(80px);
   }
+}
+
+@keyframes media-float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes media-zoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+  100% { transform: scale(1); }
+}
+
+@keyframes media-glow {
+  0% { opacity: 0.38; }
+  100% { opacity: 0.78; }
 }

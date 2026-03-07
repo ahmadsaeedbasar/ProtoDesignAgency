@@ -1,8 +1,16 @@
 import React from 'react';
 import { ArrowRight, BarChart3, Shield, Sparkles, TrendingUp, Users2, Zap } from 'lucide-react';
 import { Link } from 'react-router';
+import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
 import { StatusBadge } from '../components/StatusBadge';
 import { ROUTES } from '../routePaths';
+
+const SECTION_MEDIA = {
+  hero: { src: '/media/products-hero-right.gif', alt: 'Products hero animation', label: 'Product Visual' },
+  catalog: { src: '/media/products-catalog-left.gif', alt: 'Product catalog animation', label: 'Catalog' },
+  velocity: { src: '/media/products-velocity-right.gif', alt: 'Design velocity animation', label: 'Design Velocity' },
+  cta: { src: '/media/products-cta-left.gif', alt: 'Product collaboration animation', label: 'Collaboration' },
+} satisfies Record<string, SectionMediaItem>;
 
 export default function Products() {
   const products = [
@@ -74,91 +82,107 @@ export default function Products() {
       <section className="section-wrap hero-wrap hero-section">
         <div className="hero-glow" />
 
-        <div className="hero-content">
-          <div className="chip mb-8">
-            <Sparkles size={12} className="text-[var(--primary)]" />
-            Products for design and prototype teams
+        <div className="hero-layout">
+          <div className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left">
+            <div className="chip mb-8">
+              <Sparkles size={12} className="text-[var(--primary)]" />
+              Products for design and prototype teams
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-[var(--text-primary)]">
+              Digital Products
+            </h1>
+            <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
+              Internal products crafted to accelerate UX design, prototyping, and experimentation.
+            </p>
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight text-[var(--text-primary)]">
-            Digital Products
-          </h1>
-          <p className="text-lg md:text-xl text-[var(--text-secondary)] leading-relaxed">
-            Internal products crafted to accelerate UX design, prototyping, and experimentation.
-          </p>
+          <SectionMedia media={SECTION_MEDIA.hero} />
         </div>
       </section>
 
       <section className="section-wrap section-pad">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 cards-grid">
-          {products.map((product) => {
-            const Icon = product.icon;
-            return (
-              <article
-                key={product.name}
-                className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1"
-              >
-                <div className="flex items-start justify-between mb-6">
-                  <div className={`w-12 h-12 ${product.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform`}>
-                    <Icon size={22} className="text-[var(--text-primary)]" />
-                  </div>
-                  <StatusBadge variant={product.status} />
-                </div>
-                <h3 className="text-xl font-bold mb-1 text-[var(--text-primary)]">{product.name}</h3>
-                <p className="text-xs font-medium text-[var(--primary)] mb-3">{product.tagline}</p>
-                <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">{product.description}</p>
-                <ul className="grid grid-cols-2 gap-2 mb-6">
-                  {product.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-1 text-xs text-[var(--text-secondary)]">
-                      <div className="w-1 h-1 bg-[var(--primary)] rounded-full flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-                <button className="inline-flex items-center gap-2 text-sm text-[var(--primary)] font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more
-                  <ArrowRight size={14} />
-                </button>
-              </article>
-            );
-          })}
+        <div className="section-with-media media-left">
+          <div className="section-body">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 cards-grid">
+              {products.map((product) => {
+                const Icon = product.icon;
+                return (
+                  <article
+                    key={product.name}
+                    className="group card-equal card-pad surface-panel hover:border-[var(--primary)]/30 hover:shadow-xl hover:shadow-[var(--primary)]/8 transition-all hover:-translate-y-1"
+                  >
+                    <div className="flex items-start justify-between mb-6">
+                      <div className={`w-12 h-12 ${product.gradient} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform`}>
+                        <Icon size={22} className="text-[var(--text-primary)]" />
+                      </div>
+                      <StatusBadge variant={product.status} />
+                    </div>
+                    <h3 className="text-xl font-bold mb-1 text-[var(--text-primary)]">{product.name}</h3>
+                    <p className="text-xs font-medium text-[var(--primary)] mb-3">{product.tagline}</p>
+                    <p className="text-sm text-[var(--text-secondary)] mb-6 leading-relaxed">{product.description}</p>
+                    <ul className="grid grid-cols-2 gap-2 mb-6">
+                      {product.features.map((feature) => (
+                        <li key={feature} className="flex items-center gap-1 text-xs text-[var(--text-secondary)]">
+                          <div className="w-1 h-1 bg-[var(--primary)] rounded-full flex-shrink-0" />
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <button className="inline-flex items-center gap-2 text-sm text-[var(--primary)] font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                      Learn more
+                      <ArrowRight size={14} />
+                    </button>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+          <SectionMedia media={SECTION_MEDIA.catalog} />
         </div>
       </section>
 
       <section className="border-y border-border/70 bg-card/20">
         <div className="section-wrap section-pad">
-          <div className="section-head">
-            <h2 className="section-title">Built for Design Velocity</h2>
-            <p className="section-lead">Every product is shaped by real agency workflows and live client constraints.</p>
-          </div>
-          <div className="grid md:grid-cols-4 cards-grid">
-            {innovation.map((item) => (
-              <article key={item.title} className="card-equal card-pad surface-panel text-center hover:border-[var(--primary)]/30 transition-colors">
-                <h3 className="font-semibold mb-1 text-[var(--text-primary)]">{item.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)]">{item.desc}</p>
-              </article>
-            ))}
+          <div className="section-with-media media-right">
+            <div className="section-body">
+              <div className="section-head">
+                <h2 className="section-title">Built for Design Velocity</h2>
+                <p className="section-lead">Every product is shaped by real agency workflows and live client constraints.</p>
+              </div>
+              <div className="grid md:grid-cols-4 cards-grid">
+                {innovation.map((item) => (
+                  <article key={item.title} className="card-equal card-pad surface-panel text-center hover:border-[var(--primary)]/30 transition-colors">
+                    <h3 className="font-semibold mb-1 text-[var(--text-primary)]">{item.title}</h3>
+                    <p className="text-sm text-[var(--text-secondary)]">{item.desc}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <SectionMedia media={SECTION_MEDIA.velocity} />
           </div>
         </div>
       </section>
 
       <section className="section-wrap section-pad">
-        <div className="hero-panel text-center">
-          <div className="relative">
-            <Users2 size={46} className="mx-auto mb-5 text-[var(--text-primary)]" />
-            <h2 className="hero-panel-title text-3xl md:text-4xl mb-4">Want to co-create a product?</h2>
-            <p className="hero-panel-copy text-lg mb-8 max-w-2xl mx-auto">
-              We partner with teams to build design-driven tools from concept to launch.
-            </p>
-            <Link to={ROUTES.contact} className="cta-contrast">
-              Start Collaboration
-              <ArrowRight size={18} />
-            </Link>
+        <div className="section-with-media media-left">
+          <div className="section-body">
+            <div className="hero-panel text-center">
+              <div className="relative">
+                <Users2 size={46} className="mx-auto mb-5 text-[var(--text-primary)]" />
+                <h2 className="hero-panel-title text-3xl md:text-4xl mb-4">Want to co-create a product?</h2>
+                <p className="hero-panel-copy text-lg mb-8 max-w-2xl mx-auto">
+                  We partner with teams to build design-driven tools from concept to launch.
+                </p>
+                <Link to={ROUTES.contact} className="cta-contrast">
+                  Start Collaboration
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+            </div>
           </div>
+          <SectionMedia media={SECTION_MEDIA.cta} />
         </div>
       </section>
     </div>
   );
 }
-
-
 

@@ -1,23 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { Home } from 'lucide-react';
+import { SectionMedia, type SectionMediaItem } from '../components/SectionMedia';
 import { ROUTES } from '../routePaths';
+
+const SECTION_MEDIA = {
+  notFound: { src: '/media/notfound-right.gif', alt: 'Page not found animation', label: '404 Visual' },
+} satisfies Record<string, SectionMediaItem>;
 
 export default function NotFound() {
   return (
     <div className="page-shell min-h-[70vh] flex items-center justify-center px-6 py-16">
-      <div className="text-center surface-panel card-pad md:p-12 max-w-2xl w-full">
-        <div className="text-9xl font-bold text-[var(--primary)]/20 mb-4">404</div>
-        <h1 className="text-4xl font-bold mb-4 text-[var(--text-primary)]">Page Not Found</h1>
-        <p className="text-lg text-[var(--text-secondary)] mb-8">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <Link to={ROUTES.home} className="cta-primary px-8 py-4">
-          <Home size={20} />
-          Back to Home
-        </Link>
+      <div className="section-with-media media-right w-full max-w-5xl">
+        <div className="section-body">
+          <div className="text-center surface-panel card-pad md:p-12">
+            <div className="text-9xl font-bold text-[var(--primary)]/20 mb-4">404</div>
+            <h1 className="text-4xl font-bold mb-4 text-[var(--text-primary)]">Page Not Found</h1>
+            <p className="text-lg text-[var(--text-secondary)] mb-8">
+              The page you&apos;re looking for doesn&apos;t exist or has been moved.
+            </p>
+            <Link to={ROUTES.home} className="cta-primary px-8 py-4">
+              <Home size={20} />
+              Back to Home
+            </Link>
+          </div>
+        </div>
+        <SectionMedia media={SECTION_MEDIA.notFound} />
       </div>
     </div>
   );
 }
-

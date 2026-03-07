@@ -1,4 +1,9 @@
+/* Tailwind CSS v4 entry:
+ * - `source(none)` disables broad auto-discovery.
+ * - explicit `@source` keeps class scanning focused to app code for faster builds.
+ */
 @import 'tailwindcss' source(none);
 @source '../**/*.{js,ts,jsx,tsx}';
 
+/* Tailwind-compatible animation utilities plugin. */
 @import 'tw-animate-css';
